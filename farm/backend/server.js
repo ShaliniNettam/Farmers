@@ -41,7 +41,8 @@ if (!process.env.JWT_SECRET) {
 
 // Middleware
 app.use(cors({
-  origin: CLIENT_ORIGIN,
+//  origin: CLIENT_ORIGIN,
+  origin: ["http://3.27.131.167", "http://localhost:8083"],
   credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
