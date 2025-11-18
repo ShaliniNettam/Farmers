@@ -16,7 +16,7 @@ pipeline {
 
         stage('Build Backend Docker Image') {
             steps {
-                dir('backend') {
+                dir('farm/backend') {
                     sh 'docker build -t farm-backend:latest .'
                 }
             }
