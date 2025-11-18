@@ -1,44 +1,36 @@
 pipeline {
     agent any
 
-    environment {
-        FRONTEND_IMAGE = "farm-frontend:latest"
-        BACKEND_IMAGE  = "farm-backend:latest"
-    }
-
     stages {
 
-        stage('Clone Code') {
+        stage('Clone') {
             steps {
-                git branch: 'main', url: 'https://github.com/ShaliniNettam/Farmers.git'
+                git branch: 'development', url: 'https://github.com/ShaliniNettam/Farmers.git'
             }
         }
 
-        stage('Build Backend Docker Image') {
-            steps {
-                dir('farm/backend') {
-                    sh 'docker build -t farm-backend:latest .'
-                }
-            }
-        }
-
-        stage('Build Frontend Docker Image') {
-            steps {
-                dir('farm/frontend') {
-                    sh 'docker build -t farm-frontend:latest .'
-                }
-            }
-        }
-
-        stage('Deploy to Server') {
+        stage('Build Docker Images') {
             steps {
                 sh '''
-                cd /home/ubuntu/Farmers/farm
+                cd farm/backend
+                docker build -t farm-backend:latest .
+
+                cd ../frontend
+                docker build -t farm-frontend:latest .
+                '''
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                cd farm
                 docker-compose down
                 docker-compose up -d --build
                 '''
             }
         }
+
     }
 }
 
