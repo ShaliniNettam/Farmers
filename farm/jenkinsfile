@@ -24,7 +24,7 @@ pipeline {
 
         stage('Build Frontend Docker Image') {
             steps {
-                dir('frontend') {
+                dir('farm/frontend') {
                     sh 'docker build -t farm-frontend:latest .'
                 }
             }
