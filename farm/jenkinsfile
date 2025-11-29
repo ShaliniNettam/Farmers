@@ -8,6 +8,12 @@ pipeline {
                 git branch: 'development', url: 'https://github.com/ShaliniNettam/Farmers.git'
             }
         }
+          stage('Check Disk Space') {
+            steps {
+                echo 'Checking available disk space on Jenkins server...'
+                sh 'df -h'
+            }
+        }
 
         stage('Build Docker Images') {
             steps {
