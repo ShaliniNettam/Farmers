@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        SONAR_TOKEN = credentials('sonarcloud-token')
+        SCANNER_HOME = tool 'sonar_scanner'
+    }
+
     stages {
 
         stage('Clone') {
@@ -8,6 +13,20 @@ pipeline {
                 git branch: 'development', url: 'https://github.com/ShaliniNettam/Farmers.git'
             }
         }
+
+        stage('SonarCloud Analysis') {
+            steps {
+                sh """
+                ${SCANNER_HOME}/bin/sonar-scanner \
+                  -Dsonar.organization=shalininettam \
+                  -Dsonar.projectKey=ShaliniNettam_Farmers \
+                  -Dsonar.sources=farm \
+                  -Dsonar.host.url=https://sonarcloud.io \
+                  -Dsonar.login=${SONAR_TOKEN}
+                """
+            }
+        }
+
         stage('Build Docker Images') {
             steps {
                 sh '''
@@ -29,7 +48,11 @@ pipeline {
                 '''
             }
         }
+    }
 
+    post {
+        always {
+            echo "Pipeline Completed!"
+        }
     }
 }
-
