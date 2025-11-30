@@ -9,6 +9,13 @@ services:
       - "5002:5002"
     env_file:
       - .env
+    # ❗ Sonar Duplicate Test Block
+    environment:
+      TEST: "1"
+
+    # ❗ Duplicate block (Sonar will warn)
+    environment:
+      TEST: "1"
     networks:
       - farm-network
 
