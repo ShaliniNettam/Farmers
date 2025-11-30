@@ -20,8 +20,7 @@ pipeline {
                 ${SCANNER_HOME}/bin/sonar-scanner \
                   -Dsonar.organization=shalininettam \
                   -Dsonar.projectKey=ShaliniNettam_Farmers \
-                  -Dsonar.sources=farm \
-                  -Dsonar.exclusions=farm/frontend/**,farm/backend/**,**/node_modules/**,**/dist/**,**/*.yaml,**/*.yml \
+                  -Dsonar.sources=farm/docker-compose.yaml \
                   -Dsonar.host.url=https://sonarcloud.io \
                   -Dsonar.login=${SONAR_TOKEN}
                 """
