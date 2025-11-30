@@ -20,7 +20,7 @@ pipeline {
                 ${SCANNER_HOME}/bin/sonar-scanner \
                   -Dsonar.organization=shalininettam \
                   -Dsonar.projectKey=ShaliniNettam_Farmers \
-                  -Dsonar.sources=farm/backend/models/** \
+                  -Dsonar.sources=farm/backend/models/ \
                   -Dsonar.host.url=https://sonarcloud.io \
                   -Dsonar.login=${SONAR_TOKEN}
                 """
