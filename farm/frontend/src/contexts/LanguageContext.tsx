@@ -95,7 +95,7 @@ const translations = {
     getStarted: "Get Started",
     
     // Authentication
-    authWelcome: "Welcome to AgroArmor A ",
+    authWelcome: "Welcome to AgroArmor ",
     authSubtitle: "Access farmer tools, disease insights, and hygiene tracking in your language.",
     loginTab: "Sign In",
     registerTab: "Sign Up",
